@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @Slf4j
-public class TeacherResourceService implements IAddTeacherToCourse, IRemoveTeacherFromCourse {
+public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IRemoveTeacherFromCourse {
 
     private RetrieveCourse retrieveCourse;
     private RetrieveTeacher retrieveTeacher;
