@@ -1,11 +1,13 @@
 package com.spstudio.zheng.course.entity;
 
 import com.spstudio.zheng.common.entity.AuditMetaData;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "course")
+@EntityListeners(AuditingEntityListener.class)
 public class Course {
     @Id
     @Column(name = "id", nullable = false, length = 36)
@@ -21,7 +23,7 @@ public class Course {
     private Integer enabled;
 
     @Embedded
-    private AuditMetaData auditMetaData = new AuditMetaData();
+    private final AuditMetaData auditMetaData = new AuditMetaData();
 
     public Integer getEnabled() {
         return enabled;
