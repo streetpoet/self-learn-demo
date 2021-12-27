@@ -1,4 +1,4 @@
-package com.spstudio.zheng.courseteacherrel.port.outgoing;
+package com.spstudio.zheng.courseteacherrel.outgoing;
 
 import com.spstudio.zheng.course.repository.CourseRepository;
 import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRel;

@@ -1,4 +1,4 @@
-package com.spstudio.zheng.teacher.port.outgoing;
+package com.spstudio.zheng.teacher.outgoing;
 
 import com.spstudio.zheng.domain.model.TeacherDM;
 import com.spstudio.zheng.domain.port.outgoing.RetrieveTeacher;
