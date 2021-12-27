@@ -1,6 +1,5 @@
 package com.spstudio.zheng.teacher.repository;
 
-import com.spstudio.zheng.teacher.entity.TeacherEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

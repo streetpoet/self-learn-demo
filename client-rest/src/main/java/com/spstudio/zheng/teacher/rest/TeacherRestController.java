@@ -1,8 +1,6 @@
 package com.spstudio.zheng.teacher.rest;
 
 import com.spstudio.zheng.domain.service.TeacherResourceService;
-import com.spstudio.zheng.teacher.entity.TeacherEntity;
-import com.spstudio.zheng.teacher.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
