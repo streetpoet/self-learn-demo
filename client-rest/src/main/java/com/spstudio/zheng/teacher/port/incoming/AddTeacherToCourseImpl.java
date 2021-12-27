@@ -1,4 +1,4 @@
-package com.spstudio.zheng.employee.port.incoming;
+package com.spstudio.zheng.teacher.port.incoming;
 
 import com.spstudio.zheng.domain.port.incoming.IAddTeacherToCourse;
 import org.springframework.stereotype.Component;

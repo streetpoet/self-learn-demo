@@ -1,4 +1,4 @@
-package com.spstudio.zheng.employee.entity;
+package com.spstudio.zheng.teacher.entity;
 
 import com.spstudio.zheng.common.entity.AuditMetaData;
 import lombok.Data;

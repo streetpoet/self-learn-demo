@@ -1,4 +1,4 @@
-package com.spstudio.zheng.employee.port.outgoing;
+package com.spstudio.zheng.teacher.port.outgoing;
 
 import com.spstudio.zheng.domain.model.CourseDM;
 import com.spstudio.zheng.domain.port.outgoing.PersistCourseOperation;

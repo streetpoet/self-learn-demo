@@ -2,8 +2,8 @@ package com.spstudio.zheng.course.repository;
 
 import com.spstudio.zheng.domain.model.CourseDM;
 import com.spstudio.zheng.domain.port.outgoing.PersistCourseOperation;
-import com.spstudio.zheng.employee.entity.TeacherEntity;
-import com.spstudio.zheng.employee.repository.TeacherRepository;
+import com.spstudio.zheng.teacher.entity.TeacherEntity;
+import com.spstudio.zheng.teacher.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
