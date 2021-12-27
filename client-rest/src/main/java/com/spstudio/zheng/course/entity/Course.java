@@ -3,7 +3,6 @@ package com.spstudio.zheng.course.entity;
 import com.spstudio.zheng.common.entity.AuditMetaData;
 
 import javax.persistence.*;
-import java.time.Instant;
 
 @Entity
 @Table(name = "course")
@@ -18,17 +17,17 @@ public class Course {
     @Column(name = "course_name", nullable = false, length = 45)
     private String courseName;
 
-    @Column(name = "enabled", nullable = false, length = 45)
-    private String enabled;
+    @Column(name = "enabled", nullable = false)
+    private Integer enabled;
 
     @Embedded
     private AuditMetaData auditMetaData = new AuditMetaData();
 
-    public String getEnabled() {
+    public Integer getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(String enabled) {
+    public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
 

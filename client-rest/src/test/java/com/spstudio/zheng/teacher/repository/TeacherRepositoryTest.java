@@ -1,5 +1,6 @@
 package com.spstudio.zheng.teacher.repository;
 
+import com.spstudio.zheng.teacher.entity.Teacher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,21 +28,21 @@ class TeacherRepositoryTest {
 
     @BeforeEach
     void before() {
-        List<TeacherEntity> teacherEntities = teacherRepository.findByEmail(EMAIL);
+        List<Teacher> teacherEntities = teacherRepository.findByEmail(EMAIL);
         teacherRepository.deleteAll(teacherEntities);
     }
 
     @Test
     void findAll() {
-        List<TeacherEntity> teacherEntities = teacherRepository.findByEmail(EMAIL);
+        List<Teacher> teacherEntities = teacherRepository.findByEmail(EMAIL);
         assertEquals(0, teacherEntities.size());
-        TeacherEntity teacherEntity = new TeacherEntity();
-        teacherEntity.setId(UUID.randomUUID().toString());
-        teacherEntity.setTeacherName("teacher name");
-        teacherEntity.setEmail(EMAIL);
-        teacherEntity.setMobilePhone("7371002000");
-        teacherEntity.setEnabled(1);
-        TeacherEntity savedTeacher = teacherRepository.save(teacherEntity);
+        Teacher Teacher = new Teacher();
+        Teacher.setId(UUID.randomUUID().toString());
+        Teacher.setTeacherName("teacher name");
+        Teacher.setEmail(EMAIL);
+        Teacher.setMobilePhone("7371002000");
+        Teacher.setEnabled(1);
+        Teacher savedTeacher = teacherRepository.save(Teacher);
         assertNotNull(savedTeacher);
         teacherEntities = teacherRepository.findByEmail(EMAIL);
         assertEquals(1, teacherEntities.size());

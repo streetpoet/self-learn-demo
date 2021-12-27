@@ -24,6 +24,7 @@ public class RetrieveCourseImpl implements RetrieveCourse {
             courseDM.setCode(course.getCourseCode());
             courseDM.setName(course.getCourseName());
             courseDM.setEnabled(course.getEnabled() == 1);
+            return courseDM;
         }
         return null;
     }
