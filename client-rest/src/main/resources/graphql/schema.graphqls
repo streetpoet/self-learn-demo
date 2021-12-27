@@ -1,0 +1,8 @@
+type Query {
+    fruit(id: ID!): Fruit
+}
+
+type Fruit {
+    id: ID!
+    name: String!
+}
