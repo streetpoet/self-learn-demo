@@ -2,7 +2,7 @@ package com.spstudio.zheng.domain.port.outgoing;
 
 import com.spstudio.zheng.domain.model.CourseDM;
 
-public interface PersistCourseOperation {
+public interface RetrieveCourse {
 
-    void save(CourseDM courseDM);
+    CourseDM load(String courseCode);
 }

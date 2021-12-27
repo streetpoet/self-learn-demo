@@ -2,5 +2,5 @@ package com.spstudio.zheng.domain.port.incoming;
 
 public interface IAddTeacherToCourse {
 
-    void add(String teacherCode, String courseCode);
+    void addTeacherToCourse(String teacherCode, String courseCode);
 }

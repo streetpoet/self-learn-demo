@@ -32,7 +32,7 @@ public class TeacherRestController {
 
     @GetMapping("/test")
     public ResponseEntity<Void> getTeacherInfo() {
-        teacherResourceService.add("", "");
+        teacherResourceService.addTeacherToCourse("", "");
         return ResponseEntity.ok().build();
     }
 }
