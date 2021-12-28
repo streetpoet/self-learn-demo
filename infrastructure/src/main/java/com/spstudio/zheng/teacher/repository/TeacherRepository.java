@@ -1,14 +1,14 @@
 package com.spstudio.zheng.teacher.repository;
 
-import com.spstudio.zheng.teacher.entity.Teacher;
+import com.spstudio.zheng.teacher.entity.TeacherEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface TeacherRepository extends JpaRepository<Teacher, String> {
+public interface TeacherRepository extends JpaRepository<TeacherEntity, String> {
 
-    Optional<Teacher> findByTeacherCode(String teacherCode);
+    Optional<TeacherEntity> findByTeacherCode(String teacherCode);
 
-    List<Teacher> findByEmail(String email);
+    List<TeacherEntity> findByEmail(String email);
 }

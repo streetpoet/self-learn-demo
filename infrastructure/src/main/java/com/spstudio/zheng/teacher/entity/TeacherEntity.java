@@ -16,7 +16,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Teacher {
+public class TeacherEntity {
     @Id
     @Column(name = "id", nullable = false, length = 36)
     private String id;
@@ -53,8 +53,8 @@ public class Teacher {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Teacher teacher = (Teacher) o;
-        return id != null && Objects.equals(id, teacher.id);
+        TeacherEntity teacherEntity = (TeacherEntity) o;
+        return id != null && Objects.equals(id, teacherEntity.id);
     }
 
     @Override

@@ -6,7 +6,7 @@ import com.spstudio.zheng.courseteacherrel.repository.CourseTeacherRelRepository
 import com.spstudio.zheng.domain.model.CourseDomainObject;
 import com.spstudio.zheng.domain.model.TeacherDomainObject;
 import com.spstudio.zheng.domain.port.outgoing.IRetrieveCourse;
-import com.spstudio.zheng.teacher.entity.Teacher;
+import com.spstudio.zheng.teacher.entity.TeacherEntity;
 import com.spstudio.zheng.teacher.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,8 +36,8 @@ public class RetrieveCourseImpl implements IRetrieveCourse {
             CourseDomainObject courseDomainObject = courseEntity.toDomainObject();
             List<String> teacherIds = courseTeacherRelRepository.findByIdCourseId(courseEntity.getId())
                     .stream().map(t -> t.getId().getTeacherId()).collect(Collectors.toList());
-            List<Teacher> teachers = teacherRepository.findAllById(teacherIds);
-            Set<TeacherDomainObject> teacherDomainObjects = teachers.stream().map(Teacher::toDomainObject).collect(Collectors.toSet());
+            List<TeacherEntity> teacherEntities = teacherRepository.findAllById(teacherIds);
+            Set<TeacherDomainObject> teacherDomainObjects = teacherEntities.stream().map(TeacherEntity::toDomainObject).collect(Collectors.toSet());
             courseDomainObject.setAvailableTeachers(teacherDomainObjects);
             return Optional.of(courseDomainObject);
         }
