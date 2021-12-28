@@ -1,7 +1,9 @@
 package com.spstudio.zheng.courseteacherrel.entity;
 
 import com.spstudio.zheng.common.entity.AuditMetaData;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -13,7 +15,6 @@ import java.util.Objects;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class CourseTeacherRelationshipEntity {
 
