@@ -1,6 +1,6 @@
 package com.spstudio.zheng.course.port.outgoing;
 
-import com.spstudio.zheng.course.entity.Course;
+import com.spstudio.zheng.course.entity.CourseEntity;
 import com.spstudio.zheng.course.repository.CourseRepository;
 import com.spstudio.zheng.courseteacherrel.repository.CourseTeacherRelRepository;
 import com.spstudio.zheng.domain.model.CourseDomainObject;
@@ -30,11 +30,11 @@ public class RetrieveCourseImpl implements IRetrieveCourse {
 
     @Override
     public Optional<CourseDomainObject> loadByCourseCode(String courseCode) {
-        Optional<Course> courseOptional = courseRepository.findByCourseCode(courseCode);
+        Optional<CourseEntity> courseOptional = courseRepository.findByCourseCode(courseCode);
         if (courseOptional.isPresent()) {
-            Course course = courseOptional.get();
-            CourseDomainObject courseDomainObject = course.toDomainObject();
-            List<String> teacherIds = courseTeacherRelRepository.findByIdCourseId(course.getId())
+            CourseEntity courseEntity = courseOptional.get();
+            CourseDomainObject courseDomainObject = courseEntity.toDomainObject();
+            List<String> teacherIds = courseTeacherRelRepository.findByIdCourseId(courseEntity.getId())
                     .stream().map(t -> t.getId().getTeacherId()).collect(Collectors.toList());
             List<Teacher> teachers = teacherRepository.findAllById(teacherIds);
             Set<TeacherDomainObject> teacherDomainObjects = teachers.stream().map(Teacher::toDomainObject).collect(Collectors.toSet());

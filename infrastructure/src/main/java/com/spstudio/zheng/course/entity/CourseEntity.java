@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "course")
 @EntityListeners(AuditingEntityListener.class)
-public class Course {
+public class CourseEntity {
     @Id
     @Column(name = "id", nullable = false, length = 36)
     private String id;
