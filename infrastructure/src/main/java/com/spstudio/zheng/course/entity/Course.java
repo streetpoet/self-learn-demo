@@ -1,6 +1,7 @@
 package com.spstudio.zheng.course.entity;
 
 import com.spstudio.zheng.common.entity.AuditMetaData;
+import com.spstudio.zheng.domain.model.CourseDomainObject;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -55,5 +56,14 @@ public class Course {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public CourseDomainObject toDomainObject() {
+        CourseDomainObject courseDomainObject = new CourseDomainObject();
+        courseDomainObject.setId(this.id);
+        courseDomainObject.setCode(this.courseCode);
+        courseDomainObject.setName(this.courseName);
+        courseDomainObject.setEnabled(this.enabled == 1);
+        return courseDomainObject;
     }
 }

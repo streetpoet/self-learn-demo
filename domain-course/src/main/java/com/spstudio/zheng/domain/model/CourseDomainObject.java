@@ -19,7 +19,7 @@ public class CourseDomainObject {
 
     public void addTeacher(TeacherDomainObject teacher) {
         if (availableTeachers.stream().anyMatch(t -> t.getCode().equals(teacher.getCode()))) {
-            log.info("-> event=course already contains specified teacher, courseCode={} teacher={}", code, teacher);
+            log.info("-> course already contains specified teacher, courseCode={} teacher={}", code, teacher);
         } else {
             availableTeachers.add(teacher);
         }

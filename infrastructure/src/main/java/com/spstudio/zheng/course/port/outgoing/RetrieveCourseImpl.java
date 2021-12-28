@@ -33,11 +33,7 @@ public class RetrieveCourseImpl implements IRetrieveCourse {
         Optional<Course> courseOptional = courseRepository.findByCourseCode(courseCode);
         if (courseOptional.isPresent()) {
             Course course = courseOptional.get();
-            CourseDomainObject courseDomainObject = new CourseDomainObject();
-            courseDomainObject.setCode(course.getCourseCode());
-            courseDomainObject.setName(course.getCourseName());
-            courseDomainObject.setEnabled(course.getEnabled() == 1);
-
+            CourseDomainObject courseDomainObject = course.toDomainObject();
             List<String> teacherIds = courseTeacherRelRepository.findByIdCourseId(course.getId())
                     .stream().map(t -> t.getId().getTeacherId()).collect(Collectors.toList());
             List<Teacher> teachers = teacherRepository.findAllById(teacherIds);
