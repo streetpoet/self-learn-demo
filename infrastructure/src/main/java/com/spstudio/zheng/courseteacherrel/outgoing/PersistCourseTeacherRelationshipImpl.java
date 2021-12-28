@@ -1,6 +1,6 @@
 package com.spstudio.zheng.courseteacherrel.outgoing;
 
-import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRel;
+import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRelationshipEntity;
 import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRelId;
 import com.spstudio.zheng.courseteacherrel.repository.CourseTeacherRelRepository;
 import com.spstudio.zheng.domain.model.CourseDomainObject;
@@ -25,11 +25,11 @@ public class PersistCourseTeacherRelationshipImpl implements PersistCourseTeache
         Set<TeacherDomainObject> availableTeachers = courseDomainObject.getAvailableTeachers();
         for (TeacherDomainObject teacher : availableTeachers) {
             CourseTeacherRelId courseTeacherRelId = getCourseTeacherRelId(courseDomainObject, teacher);
-            Optional<CourseTeacherRel> optionalCourseTeacherRel = courseTeacherRelRepository.findById(courseTeacherRelId);
+            Optional<CourseTeacherRelationshipEntity> optionalCourseTeacherRel = courseTeacherRelRepository.findById(courseTeacherRelId);
             if (optionalCourseTeacherRel.isEmpty()) {
-                CourseTeacherRel courseTeacherRel = getCourseTeacherRel(courseTeacherRelId);
-                courseTeacherRelRepository.save(courseTeacherRel);
-                log.info("-> entity saved. entity={}", courseTeacherRel);
+                CourseTeacherRelationshipEntity courseTeacherRelationshipEntity = getCourseTeacherRel(courseTeacherRelId);
+                courseTeacherRelRepository.save(courseTeacherRelationshipEntity);
+                log.info("-> entity saved. entity={}", courseTeacherRelationshipEntity);
             } else {
                 log.info("-> entity already exists. entity={}", optionalCourseTeacherRel.get());
             }
@@ -37,10 +37,10 @@ public class PersistCourseTeacherRelationshipImpl implements PersistCourseTeache
 
     }
 
-    private CourseTeacherRel getCourseTeacherRel(CourseTeacherRelId courseTeacherRelId) {
-        CourseTeacherRel courseTeacherRel = new CourseTeacherRel();
-        courseTeacherRel.setId(courseTeacherRelId);
-        return courseTeacherRel;
+    private CourseTeacherRelationshipEntity getCourseTeacherRel(CourseTeacherRelId courseTeacherRelId) {
+        CourseTeacherRelationshipEntity courseTeacherRelationshipEntity = new CourseTeacherRelationshipEntity();
+        courseTeacherRelationshipEntity.setId(courseTeacherRelId);
+        return courseTeacherRelationshipEntity;
     }
 
     private CourseTeacherRelId getCourseTeacherRelId(CourseDomainObject courseDomainObject, TeacherDomainObject teacherDomainObject) {

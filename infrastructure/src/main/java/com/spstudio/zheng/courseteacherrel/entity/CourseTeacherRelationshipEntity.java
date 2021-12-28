@@ -15,7 +15,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class CourseTeacherRel {
+public class CourseTeacherRelationshipEntity {
 
     @EmbeddedId
     private CourseTeacherRelId id;
@@ -27,7 +27,7 @@ public class CourseTeacherRel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        CourseTeacherRel that = (CourseTeacherRel) o;
+        CourseTeacherRelationshipEntity that = (CourseTeacherRelationshipEntity) o;
         return id != null && Objects.equals(id, that.id);
     }
 
