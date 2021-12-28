@@ -6,7 +6,7 @@ import com.spstudio.zheng.domain.port.incoming.IAddTeacherToCourse;
 import com.spstudio.zheng.domain.port.incoming.IRemoveTeacherFromCourse;
 import com.spstudio.zheng.domain.port.outgoing.IRetrieveCourse;
 import com.spstudio.zheng.domain.port.outgoing.IRetrieveTeacher;
-import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRel;
+import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRelationship;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,7 +18,7 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
 
     private IRetrieveCourse retrieveCourse;
     private IRetrieveTeacher retrieveTeacher;
-    private PersistCourseTeacherRel persistCourseTeacherRel;
+    private PersistCourseTeacherRelationship persistCourseTeacherRelationship;
 
     @Override
     public void addTeacherToCourse(String teacherCode, String courseCode) {
@@ -28,7 +28,7 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
             log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDomainObject, courseDomainObject);
         } else {
             courseDomainObject.get().addTeacher(teacherDomainObject.get());
-            persistCourseTeacherRel.save(courseDomainObject.get());
+            persistCourseTeacherRelationship.save(courseDomainObject.get());
         }
     }
 
@@ -40,7 +40,7 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
             log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDomainObject, courseDomainObject);
         } else {
             courseDomainObject.get().removeTeacher(teacherDomainObject.get());
-            persistCourseTeacherRel.save(courseDomainObject.get());
+            persistCourseTeacherRelationship.save(courseDomainObject.get());
         }
     }
 }

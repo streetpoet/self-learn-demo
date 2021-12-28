@@ -5,7 +5,7 @@ import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRelId;
 import com.spstudio.zheng.courseteacherrel.repository.CourseTeacherRelRepository;
 import com.spstudio.zheng.domain.model.CourseDomainObject;
 import com.spstudio.zheng.domain.model.TeacherDomainObject;
-import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRel;
+import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRelationship;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class PersistCourseTeacherRelImpl implements PersistCourseTeacherRel {
+public class PersistCourseTeacherRelationshipImpl implements PersistCourseTeacherRelationship {
 
     @Autowired
     CourseTeacherRelRepository courseTeacherRelRepository;

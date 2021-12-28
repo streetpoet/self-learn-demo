@@ -1,6 +1,6 @@
 package com.spstudio.zheng.appconfig;
 
-import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRel;
+import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRelationship;
 import com.spstudio.zheng.domain.port.outgoing.IRetrieveCourse;
 import com.spstudio.zheng.domain.port.outgoing.IRetrieveTeacher;
 import com.spstudio.zheng.domain.service.CourseTeacherRelationshipService;
@@ -13,8 +13,8 @@ public class ApplicationConfig {
     @Bean
     CourseTeacherRelationshipService teacherResourceService(IRetrieveCourse IRetrieveCourse,
                                                             IRetrieveTeacher IRetrieveTeacher,
-                                                            PersistCourseTeacherRel persistCourseTeacherRel) {
-        return new CourseTeacherRelationshipService(IRetrieveCourse, IRetrieveTeacher, persistCourseTeacherRel);
+                                                            PersistCourseTeacherRelationship persistCourseTeacherRelationship) {
+        return new CourseTeacherRelationshipService(IRetrieveCourse, IRetrieveTeacher, persistCourseTeacherRelationship);
     }
 
 }
