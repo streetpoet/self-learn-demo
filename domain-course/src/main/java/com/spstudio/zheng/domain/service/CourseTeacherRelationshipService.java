@@ -1,7 +1,7 @@
 package com.spstudio.zheng.domain.service;
 
 import com.spstudio.zheng.domain.model.CourseDomainObject;
-import com.spstudio.zheng.domain.model.TeacherDM;
+import com.spstudio.zheng.domain.model.TeacherDomainObject;
 import com.spstudio.zheng.domain.port.incoming.IAddTeacherToCourse;
 import com.spstudio.zheng.domain.port.incoming.IRemoveTeacherFromCourse;
 import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRel;
@@ -20,24 +20,24 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
 
     @Override
     public void addTeacherToCourse(String teacherCode, String courseCode) {
-        TeacherDM teacherDM = retrieveTeacher.load(teacherCode);
+        TeacherDomainObject teacherDomainObject = retrieveTeacher.load(teacherCode);
         CourseDomainObject courseDomainObject = retrieveCourse.load(courseCode);
-        if (teacherDM == null || courseDomainObject == null) {
-            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDM, courseDomainObject);
+        if (teacherDomainObject == null || courseDomainObject == null) {
+            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDomainObject, courseDomainObject);
         } else {
-            courseDomainObject.addTeacher(teacherDM);
+            courseDomainObject.addTeacher(teacherDomainObject);
             persistCourseTeacherRel.save(courseDomainObject);
         }
     }
 
     @Override
     public void removeTeacherFromCourse(String teacherCode, String courseCode) {
-        TeacherDM teacherDM = retrieveTeacher.load(teacherCode);
+        TeacherDomainObject teacherDomainObject = retrieveTeacher.load(teacherCode);
         CourseDomainObject courseDomainObject = retrieveCourse.load(courseCode);
-        if (teacherDM == null || courseDomainObject == null) {
-            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDM, courseDomainObject);
+        if (teacherDomainObject == null || courseDomainObject == null) {
+            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDomainObject, courseDomainObject);
         } else {
-            courseDomainObject.removeTeacher(teacherDM);
+            courseDomainObject.removeTeacher(teacherDomainObject);
             persistCourseTeacherRel.save(courseDomainObject);
         }
     }

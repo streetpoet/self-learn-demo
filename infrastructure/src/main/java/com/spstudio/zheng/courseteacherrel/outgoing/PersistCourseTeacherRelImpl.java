@@ -5,7 +5,7 @@ import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRel;
 import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRelId;
 import com.spstudio.zheng.courseteacherrel.repository.CourseTeacherRelRepository;
 import com.spstudio.zheng.domain.model.CourseDomainObject;
-import com.spstudio.zheng.domain.model.TeacherDM;
+import com.spstudio.zheng.domain.model.TeacherDomainObject;
 import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRel;
 import com.spstudio.zheng.teacher.repository.TeacherRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,10 +30,10 @@ public class PersistCourseTeacherRelImpl implements PersistCourseTeacherRel {
 
     @Override
     public void save(CourseDomainObject courseDomainObject) {
-        List<TeacherDM> availableTeachers = courseDomainObject.getAvailableTeachers();
-        for (TeacherDM teacherDM : availableTeachers) {
+        List<TeacherDomainObject> availableTeachers = courseDomainObject.getAvailableTeachers();
+        for (TeacherDomainObject teacherDomainObject : availableTeachers) {
             String courseId = courseRepository.findByCourseCode(courseDomainObject.getCode()).orElseThrow().getId();
-            String teacherId = teacherRepository.findByTeacherCode(teacherDM.getCode()).orElseThrow().getId();
+            String teacherId = teacherRepository.findByTeacherCode(teacherDomainObject.getCode()).orElseThrow().getId();
             CourseTeacherRelId courseTeacherRelId = new CourseTeacherRelId();
             courseTeacherRelId.setCourseId(courseId);
             courseTeacherRelId.setTeacherId(teacherId);

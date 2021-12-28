@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-public class TeacherDM {
+public class TeacherDomainObject {
 
     private String code;
     private String name;

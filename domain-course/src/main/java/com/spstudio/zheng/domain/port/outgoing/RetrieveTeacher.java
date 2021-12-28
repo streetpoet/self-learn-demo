@@ -1,8 +1,8 @@
 package com.spstudio.zheng.domain.port.outgoing;
 
-import com.spstudio.zheng.domain.model.TeacherDM;
+import com.spstudio.zheng.domain.model.TeacherDomainObject;
 
 public interface RetrieveTeacher {
 
-    TeacherDM load(String teacherCode);
+    TeacherDomainObject load(String teacherCode);
 }

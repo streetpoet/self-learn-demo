@@ -15,18 +15,18 @@ public class CourseDomainObject {
     private boolean enabled;
 
     @Setter(AccessLevel.NONE)
-    private List<TeacherDM> availableTeachers = new ArrayList<>();
+    private List<TeacherDomainObject> availableTeachers = new ArrayList<>();
 
-    public void addTeacher(TeacherDM teacherDM) {
-        availableTeachers.add(teacherDM);
+    public void addTeacher(TeacherDomainObject teacherDomainObject) {
+        availableTeachers.add(teacherDomainObject);
         // only the first teacher will turn on course status
         if (availableTeachers.size() == 1) {
             enabled = true;
         }
     }
 
-    public void removeTeacher(TeacherDM teacherDM) {
-        boolean removed = availableTeachers.removeIf(t -> t.getCode().equals(teacherDM.getCode()));
+    public void removeTeacher(TeacherDomainObject teacherDomainObject) {
+        boolean removed = availableTeachers.removeIf(t -> t.getCode().equals(teacherDomainObject.getCode()));
         if (removed && availableTeachers.size() == 0) {
             enabled = false;
         }

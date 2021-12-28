@@ -11,7 +11,7 @@ class CourseDomainObjectTest {
         CourseDomainObject courseDomainObject = new CourseDomainObject();
         assertTrue(courseDomainObject.getAvailableTeachers().isEmpty());
         assertFalse(courseDomainObject.isEnabled());
-        courseDomainObject.addTeacher(new TeacherDM());
+        courseDomainObject.addTeacher(new TeacherDomainObject());
         assertEquals(1, courseDomainObject.getAvailableTeachers().size());
         assertTrue(courseDomainObject.isEnabled());
     }
@@ -20,10 +20,10 @@ class CourseDomainObjectTest {
     void removeTeacher() {
         String code = "teacher-code";
         CourseDomainObject courseDomainObject = new CourseDomainObject();
-        TeacherDM teacherDM = new TeacherDM();
-        teacherDM.setCode(code);
-        courseDomainObject.addTeacher(teacherDM);
-        courseDomainObject.removeTeacher(teacherDM);
+        TeacherDomainObject teacherDomainObject = new TeacherDomainObject();
+        teacherDomainObject.setCode(code);
+        courseDomainObject.addTeacher(teacherDomainObject);
+        courseDomainObject.removeTeacher(teacherDomainObject);
         assertEquals(0, courseDomainObject.getAvailableTeachers().size());
         assertFalse(courseDomainObject.isEnabled());
     }

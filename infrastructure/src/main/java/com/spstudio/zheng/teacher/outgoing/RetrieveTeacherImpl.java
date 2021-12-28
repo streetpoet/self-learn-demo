@@ -1,6 +1,6 @@
 package com.spstudio.zheng.teacher.outgoing;
 
-import com.spstudio.zheng.domain.model.TeacherDM;
+import com.spstudio.zheng.domain.model.TeacherDomainObject;
 import com.spstudio.zheng.domain.port.outgoing.RetrieveTeacher;
 import com.spstudio.zheng.teacher.entity.Teacher;
 import com.spstudio.zheng.teacher.repository.TeacherRepository;
@@ -16,16 +16,16 @@ public class RetrieveTeacherImpl implements RetrieveTeacher {
     TeacherRepository teacherRepository;
 
     @Override
-    public TeacherDM load(String teacherCode) {
+    public TeacherDomainObject load(String teacherCode) {
         Optional<Teacher> teacherOptional = teacherRepository.findByTeacherCode(teacherCode);
         if (teacherOptional.isPresent()) {
             Teacher teacher = teacherOptional.get();
-            TeacherDM teacherDM = new TeacherDM();
-            teacherDM.setCode(teacher.getTeacherCode());
-            teacherDM.setEmail(teacher.getEmail());
-            teacherDM.setName(teacher.getTeacherName());
-            teacherDM.setEnabled(teacher.getEnabled() == 1);
-            return teacherDM;
+            TeacherDomainObject teacherDomainObject = new TeacherDomainObject();
+            teacherDomainObject.setCode(teacher.getTeacherCode());
+            teacherDomainObject.setEmail(teacher.getEmail());
+            teacherDomainObject.setName(teacher.getTeacherName());
+            teacherDomainObject.setEnabled(teacher.getEnabled() == 1);
+            return teacherDomainObject;
         }
         return null;
     }
