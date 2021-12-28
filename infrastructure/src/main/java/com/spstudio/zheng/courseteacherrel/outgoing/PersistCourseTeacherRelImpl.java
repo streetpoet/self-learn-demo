@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -22,9 +22,9 @@ public class PersistCourseTeacherRelImpl implements PersistCourseTeacherRel {
 
     @Override
     public void save(CourseDomainObject courseDomainObject) {
-        List<TeacherDomainObject> availableTeachers = courseDomainObject.getAvailableTeacherCodes();
-        for (TeacherDomainObject teacherDomainObject : availableTeachers) {
-            CourseTeacherRelId courseTeacherRelId = getCourseTeacherRelId(courseDomainObject, teacherDomainObject);
+        Set<TeacherDomainObject> availableTeachers = courseDomainObject.getAvailableTeachers();
+        for (TeacherDomainObject teacher : availableTeachers) {
+            CourseTeacherRelId courseTeacherRelId = getCourseTeacherRelId(courseDomainObject, teacher);
             Optional<CourseTeacherRel> optionalCourseTeacherRel = courseTeacherRelRepository.findById(courseTeacherRelId);
             if (optionalCourseTeacherRel.isEmpty()) {
                 CourseTeacherRel courseTeacherRel = getCourseTeacherRel(courseTeacherRelId);

@@ -1,13 +1,21 @@
 package com.spstudio.zheng.teacher.entity;
 
 import com.spstudio.zheng.common.entity.AuditMetaData;
+import com.spstudio.zheng.domain.model.TeacherDomainObject;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "teacher")
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Teacher {
     @Id
     @Column(name = "id", nullable = false, length = 36)
@@ -31,51 +39,26 @@ public class Teacher {
     @Embedded
     private AuditMetaData auditMetaData = new AuditMetaData();
 
-    public Integer getEnabled() {
-        return enabled;
+    public TeacherDomainObject toDomainObject() {
+        TeacherDomainObject teacherDomainObject = new TeacherDomainObject();
+        teacherDomainObject.setId(this.id);
+        teacherDomainObject.setEnabled(this.enabled == 1);
+        teacherDomainObject.setCode(this.teacherCode);
+        teacherDomainObject.setName(this.teacherName);
+        teacherDomainObject.setEmail(this.email);
+        return teacherDomainObject;
     }
 
-    public void setEnabled(Integer enabled) {
-        this.enabled = enabled;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Teacher teacher = (Teacher) o;
+        return id != null && Objects.equals(id, teacher.id);
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public String getTeacherCode() {
-        return teacherCode;
-    }
-
-    public void setTeacherCode(String teacherCode) {
-        this.teacherCode = teacherCode;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

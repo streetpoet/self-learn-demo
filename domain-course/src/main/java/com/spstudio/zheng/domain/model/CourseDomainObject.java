@@ -1,8 +1,6 @@
 package com.spstudio.zheng.domain.model;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
@@ -12,28 +10,27 @@ import java.util.Set;
 @Slf4j
 public class CourseDomainObject {
 
-    @Setter(AccessLevel.NONE)
     private String id;
     private String code;
     private String name;
     private boolean enabled;
 
-    private Set<String> availableTeacherCodes = new HashSet<>();
+    private Set<TeacherDomainObject> availableTeachers = new HashSet<>();
 
-    public void addTeacherByCode(String teacherCode) {
-        if (availableTeacherCodes.contains(teacherCode)) {
-            log.info("-> event=course already contains specified teacher, courseCode={} teacherCode={}", code, teacherCode);
+    public void addTeacher(TeacherDomainObject teacher) {
+        if (availableTeachers.stream().anyMatch(t -> t.getCode().equals(teacher.getCode()))) {
+            log.info("-> event=course already contains specified teacher, courseCode={} teacher={}", code, teacher);
         } else {
-            availableTeacherCodes.add(teacherCode);
+            availableTeachers.add(teacher);
         }
-        if (availableTeacherCodes.size() == 1) {
+        if (availableTeachers.size() == 1) {
             enabled = true;
         }
     }
 
-    public void removeTeacherCode(String teacherCode) {
-        boolean removed = availableTeacherCodes.remove(teacherCode);
-        if (removed && availableTeacherCodes.size() == 0) {
+    public void removeTeacher(TeacherDomainObject teacher) {
+        boolean removed = availableTeachers.removeIf(t -> t.getCode().equals(teacher.getCode()));
+        if (removed && availableTeachers.size() == 0) {
             enabled = false;
         }
     }

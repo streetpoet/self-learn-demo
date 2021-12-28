@@ -5,7 +5,7 @@ import com.spstudio.zheng.course.repository.CourseRepository;
 import com.spstudio.zheng.courseteacherrel.repository.CourseTeacherRelRepository;
 import com.spstudio.zheng.domain.model.CourseDomainObject;
 import com.spstudio.zheng.domain.model.TeacherDomainObject;
-import com.spstudio.zheng.domain.port.outgoing.RetrieveCourse;
+import com.spstudio.zheng.domain.port.outgoing.IRetrieveCourse;
 import com.spstudio.zheng.teacher.entity.Teacher;
 import com.spstudio.zheng.teacher.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class RetrieveCourseImpl implements RetrieveCourse {
+public class RetrieveCourseImpl implements IRetrieveCourse {
 
     @Autowired
     CourseRepository courseRepository;
@@ -28,7 +29,7 @@ public class RetrieveCourseImpl implements RetrieveCourse {
     CourseTeacherRelRepository courseTeacherRelRepository;
 
     @Override
-    public CourseDomainObject load(String courseCode) {
+    public Optional<CourseDomainObject> loadByCourseCode(String courseCode) {
         Optional<Course> courseOptional = courseRepository.findByCourseCode(courseCode);
         if (courseOptional.isPresent()) {
             Course course = courseOptional.get();
@@ -40,18 +41,10 @@ public class RetrieveCourseImpl implements RetrieveCourse {
             List<String> teacherIds = courseTeacherRelRepository.findByIdCourseId(course.getId())
                     .stream().map(t -> t.getId().getTeacherId()).collect(Collectors.toList());
             List<Teacher> teachers = teacherRepository.findAllById(teacherIds);
-            List<TeacherDomainObject> teacherDomainObjects = teachers.stream().map(t -> {
-                TeacherDomainObject teacherDomainObject = new TeacherDomainObject();
-                teacherDomainObject.setId(t.getId());
-                teacherDomainObject.setEnabled(t.getEnabled() == 1);
-                teacherDomainObject.setCode(t.getTeacherCode());
-                teacherDomainObject.setName(t.getTeacherName());
-                teacherDomainObject.setCode(t.getEmail());
-                return teacherDomainObject;
-            }).collect(Collectors.toList());
-            courseDomainObject.setAvailableTeacherCodes(teacherDomainObjects);
-            return courseDomainObject;
+            Set<TeacherDomainObject> teacherDomainObjects = teachers.stream().map(Teacher::toDomainObject).collect(Collectors.toSet());
+            courseDomainObject.setAvailableTeachers(teacherDomainObjects);
+            return Optional.of(courseDomainObject);
         }
-        return null;
+        return Optional.empty();
     }
 }

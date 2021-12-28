@@ -12,10 +12,10 @@ class CourseDomainObjectTest {
     @Test
     void addTeacher() {
         CourseDomainObject courseDomainObject = new CourseDomainObject();
-        assertTrue(courseDomainObject.getAvailableTeacherCodes().isEmpty());
+        assertTrue(courseDomainObject.getAvailableTeachers().isEmpty());
         assertFalse(courseDomainObject.isEnabled());
-        courseDomainObject.addTeacherByCode("teacherCode");
-        assertEquals(1, courseDomainObject.getAvailableTeacherCodes().size());
+        courseDomainObject.addTeacher(new TeacherDomainObject());
+        assertEquals(1, courseDomainObject.getAvailableTeachers().size());
         assertTrue(courseDomainObject.isEnabled());
     }
 
@@ -23,11 +23,13 @@ class CourseDomainObjectTest {
     void removeTeacher() {
         String code = "teacher-code";
         CourseDomainObject courseDomainObject = new CourseDomainObject();
-        Set<String> teacherCodes = new HashSet<>();
-        teacherCodes.add("teacherCode");
-        courseDomainObject.setAvailableTeacherCodes(teacherCodes);
-        courseDomainObject.removeTeacherCode("teacherCode");
-        assertEquals(0, courseDomainObject.getAvailableTeacherCodes().size());
+        Set<TeacherDomainObject> teacherCodes = new HashSet<>();
+        TeacherDomainObject teacherDomainObject = new TeacherDomainObject();
+        teacherDomainObject.setCode(code);
+        teacherCodes.add(teacherDomainObject);
+        courseDomainObject.setAvailableTeachers(teacherCodes);
+        courseDomainObject.removeTeacher(teacherDomainObject);
+        assertEquals(0, courseDomainObject.getAvailableTeachers().size());
         assertFalse(courseDomainObject.isEnabled());
     }
 }
