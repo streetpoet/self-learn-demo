@@ -2,6 +2,9 @@ package com.spstudio.zheng.domain.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CourseDomainObjectTest {
@@ -9,10 +12,10 @@ class CourseDomainObjectTest {
     @Test
     void addTeacher() {
         CourseDomainObject courseDomainObject = new CourseDomainObject();
-        assertTrue(courseDomainObject.getAvailableTeachers().isEmpty());
+        assertTrue(courseDomainObject.getAvailableTeacherCodes().isEmpty());
         assertFalse(courseDomainObject.isEnabled());
-        courseDomainObject.addTeacher(new TeacherDomainObject());
-        assertEquals(1, courseDomainObject.getAvailableTeachers().size());
+        courseDomainObject.addTeacherByCode("teacherCode");
+        assertEquals(1, courseDomainObject.getAvailableTeacherCodes().size());
         assertTrue(courseDomainObject.isEnabled());
     }
 
@@ -20,11 +23,11 @@ class CourseDomainObjectTest {
     void removeTeacher() {
         String code = "teacher-code";
         CourseDomainObject courseDomainObject = new CourseDomainObject();
-        TeacherDomainObject teacherDomainObject = new TeacherDomainObject();
-        teacherDomainObject.setCode(code);
-        courseDomainObject.addTeacher(teacherDomainObject);
-        courseDomainObject.removeTeacher(teacherDomainObject);
-        assertEquals(0, courseDomainObject.getAvailableTeachers().size());
+        Set<String> teacherCodes = new HashSet<>();
+        teacherCodes.add("teacherCode");
+        courseDomainObject.setAvailableTeacherCodes(teacherCodes);
+        courseDomainObject.removeTeacherCode("teacherCode");
+        assertEquals(0, courseDomainObject.getAvailableTeacherCodes().size());
         assertFalse(courseDomainObject.isEnabled());
     }
 }

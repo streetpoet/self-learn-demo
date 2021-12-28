@@ -1,13 +1,11 @@
 package com.spstudio.zheng.courseteacherrel.outgoing;
 
-import com.spstudio.zheng.course.repository.CourseRepository;
 import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRel;
 import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRelId;
 import com.spstudio.zheng.courseteacherrel.repository.CourseTeacherRelRepository;
 import com.spstudio.zheng.domain.model.CourseDomainObject;
 import com.spstudio.zheng.domain.model.TeacherDomainObject;
 import com.spstudio.zheng.domain.port.outgoing.PersistCourseTeacherRel;
-import com.spstudio.zheng.teacher.repository.TeacherRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,27 +18,16 @@ import java.util.Optional;
 public class PersistCourseTeacherRelImpl implements PersistCourseTeacherRel {
 
     @Autowired
-    CourseRepository courseRepository;
-
-    @Autowired
-    TeacherRepository teacherRepository;
-
-    @Autowired
     CourseTeacherRelRepository courseTeacherRelRepository;
 
     @Override
     public void save(CourseDomainObject courseDomainObject) {
-        List<TeacherDomainObject> availableTeachers = courseDomainObject.getAvailableTeachers();
+        List<TeacherDomainObject> availableTeachers = courseDomainObject.getAvailableTeacherCodes();
         for (TeacherDomainObject teacherDomainObject : availableTeachers) {
-            String courseId = courseRepository.findByCourseCode(courseDomainObject.getCode()).orElseThrow().getId();
-            String teacherId = teacherRepository.findByTeacherCode(teacherDomainObject.getCode()).orElseThrow().getId();
-            CourseTeacherRelId courseTeacherRelId = new CourseTeacherRelId();
-            courseTeacherRelId.setCourseId(courseId);
-            courseTeacherRelId.setTeacherId(teacherId);
+            CourseTeacherRelId courseTeacherRelId = getCourseTeacherRelId(courseDomainObject, teacherDomainObject);
             Optional<CourseTeacherRel> optionalCourseTeacherRel = courseTeacherRelRepository.findById(courseTeacherRelId);
             if (optionalCourseTeacherRel.isEmpty()) {
-                CourseTeacherRel courseTeacherRel = new CourseTeacherRel();
-                courseTeacherRel.setId(courseTeacherRelId);
+                CourseTeacherRel courseTeacherRel = getCourseTeacherRel(courseTeacherRelId);
                 courseTeacherRelRepository.save(courseTeacherRel);
                 log.info("-> entity saved. entity={}", courseTeacherRel);
             } else {
@@ -48,5 +35,20 @@ public class PersistCourseTeacherRelImpl implements PersistCourseTeacherRel {
             }
         }
 
+    }
+
+    private CourseTeacherRel getCourseTeacherRel(CourseTeacherRelId courseTeacherRelId) {
+        CourseTeacherRel courseTeacherRel = new CourseTeacherRel();
+        courseTeacherRel.setId(courseTeacherRelId);
+        return courseTeacherRel;
+    }
+
+    private CourseTeacherRelId getCourseTeacherRelId(CourseDomainObject courseDomainObject, TeacherDomainObject teacherDomainObject) {
+        String courseId = courseDomainObject.getId();
+        String teacherId = teacherDomainObject.getId();
+        CourseTeacherRelId courseTeacherRelId = new CourseTeacherRelId();
+        courseTeacherRelId.setCourseId(courseId);
+        courseTeacherRelId.setTeacherId(teacherId);
+        return courseTeacherRelId;
     }
 }

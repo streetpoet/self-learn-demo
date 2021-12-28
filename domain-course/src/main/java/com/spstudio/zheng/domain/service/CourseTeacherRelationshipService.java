@@ -25,7 +25,7 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
         if (teacherDomainObject == null || courseDomainObject == null) {
             log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDomainObject, courseDomainObject);
         } else {
-            courseDomainObject.addTeacher(teacherDomainObject);
+            courseDomainObject.addTeacherByCode(teacherDomainObject.getCode());
             persistCourseTeacherRel.save(courseDomainObject);
         }
     }
@@ -37,7 +37,7 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
         if (teacherDomainObject == null || courseDomainObject == null) {
             log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDomainObject, courseDomainObject);
         } else {
-            courseDomainObject.removeTeacher(teacherDomainObject);
+            courseDomainObject.removeTeacherCode(teacherDomainObject.getId());
             persistCourseTeacherRel.save(courseDomainObject);
         }
     }

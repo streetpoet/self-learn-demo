@@ -4,5 +4,9 @@ import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRel;
 import com.spstudio.zheng.courseteacherrel.entity.CourseTeacherRelId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface CourseTeacherRelRepository extends JpaRepository<CourseTeacherRel, CourseTeacherRelId> {
+
+    List<CourseTeacherRel> findByIdCourseId(String courseId);
 }

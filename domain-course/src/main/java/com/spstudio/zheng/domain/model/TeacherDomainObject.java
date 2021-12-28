@@ -11,12 +11,13 @@ import java.util.Set;
 @Data
 public class TeacherDomainObject {
 
+    @Setter(AccessLevel.NONE)
+    private String id;
     private String code;
     private String name;
     private String email;
     private boolean enabled;
 
-    @Setter(AccessLevel.NONE)
     private Set<DayOfWeek> workingDays = new HashSet<>();
 
     public void addWorkingDay(DayOfWeek dayOfWeek) {
