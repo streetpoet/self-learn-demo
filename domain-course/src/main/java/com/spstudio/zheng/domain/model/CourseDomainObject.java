@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class CourseDM {
+public class CourseDomainObject {
 
     private String code;
     private String name;

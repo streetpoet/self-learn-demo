@@ -1,8 +1,8 @@
 package com.spstudio.zheng.domain.port.outgoing;
 
-import com.spstudio.zheng.domain.model.CourseDM;
+import com.spstudio.zheng.domain.model.CourseDomainObject;
 
 public interface PersistCourseTeacherRel {
 
-    void save(CourseDM courseDM);
+    void save(CourseDomainObject courseDomainObject);
 }

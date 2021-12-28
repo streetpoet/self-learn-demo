@@ -1,6 +1,6 @@
 package com.spstudio.zheng.domain.service;
 
-import com.spstudio.zheng.domain.model.CourseDM;
+import com.spstudio.zheng.domain.model.CourseDomainObject;
 import com.spstudio.zheng.domain.model.TeacherDM;
 import com.spstudio.zheng.domain.port.incoming.IAddTeacherToCourse;
 import com.spstudio.zheng.domain.port.incoming.IRemoveTeacherFromCourse;
@@ -21,24 +21,24 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
     @Override
     public void addTeacherToCourse(String teacherCode, String courseCode) {
         TeacherDM teacherDM = retrieveTeacher.load(teacherCode);
-        CourseDM courseDM = retrieveCourse.load(courseCode);
-        if (teacherDM == null || courseDM == null) {
-            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDM, courseDM);
+        CourseDomainObject courseDomainObject = retrieveCourse.load(courseCode);
+        if (teacherDM == null || courseDomainObject == null) {
+            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDM, courseDomainObject);
         } else {
-            courseDM.addTeacher(teacherDM);
-            persistCourseTeacherRel.save(courseDM);
+            courseDomainObject.addTeacher(teacherDM);
+            persistCourseTeacherRel.save(courseDomainObject);
         }
     }
 
     @Override
     public void removeTeacherFromCourse(String teacherCode, String courseCode) {
         TeacherDM teacherDM = retrieveTeacher.load(teacherCode);
-        CourseDM courseDM = retrieveCourse.load(courseCode);
-        if (teacherDM == null || courseDM == null) {
-            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDM, courseDM);
+        CourseDomainObject courseDomainObject = retrieveCourse.load(courseCode);
+        if (teacherDM == null || courseDomainObject == null) {
+            log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDM, courseDomainObject);
         } else {
-            courseDM.removeTeacher(teacherDM);
-            persistCourseTeacherRel.save(courseDM);
+            courseDomainObject.removeTeacher(teacherDM);
+            persistCourseTeacherRel.save(courseDomainObject);
         }
     }
 }

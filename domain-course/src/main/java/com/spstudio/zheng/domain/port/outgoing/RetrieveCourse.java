@@ -1,8 +1,8 @@
 package com.spstudio.zheng.domain.port.outgoing;
 
-import com.spstudio.zheng.domain.model.CourseDM;
+import com.spstudio.zheng.domain.model.CourseDomainObject;
 
 public interface RetrieveCourse {
 
-    CourseDM load(String courseCode);
+    CourseDomainObject load(String courseCode);
 }
