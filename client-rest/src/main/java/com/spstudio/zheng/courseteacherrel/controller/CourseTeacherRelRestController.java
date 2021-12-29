@@ -20,7 +20,11 @@ public class CourseTeacherRelRestController {
 
     @PostMapping("/teacher-course-rel")
     public ResponseEntity<Void> addTeacherToCourse(@RequestBody CreateTeacherCourseRelationshipRequest request) {
-        addTeacherToCourse.addTeacherToCourse(request.teacherCode(), request.courseCode());
+        try {
+            addTeacherToCourse.addTeacherToCourse(request.teacherCode(), request.courseCode());
+        } catch (IAddTeacherToCourse.AddTeacherToCourseRuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok().build();
     }
 }

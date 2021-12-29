@@ -26,6 +26,7 @@ public class CourseTeacherRelationshipService implements IAddTeacherToCourse, IR
         Optional<CourseDomainObject> courseDomainObject = retrieveCourse.loadByCourseCode(courseCode);
         if (teacherDomainObject.isEmpty() || courseDomainObject.isEmpty()) {
             log.warn("-> can not found teacherDM or courseDM, teacherDM={} courseDM={}", teacherDomainObject, courseDomainObject);
+            throw new AddTeacherToCourseRuntimeException();
         } else {
             courseDomainObject.get().addTeacher(teacherDomainObject.get());
             persistCourseTeacherRelationship.save(courseDomainObject.get());
